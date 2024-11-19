@@ -44,4 +44,57 @@
 - Operable :- fill the form, navigate the form
 - Understandable
 - Robust :- should follow the same standard to all devices.
+
+### Third Party Screen Readers
+- JAWS
+- NVDA
+
+### Testing Screen Readers
+- Windows ( Ctrl + WinKey + Enter)
+- Mac (Cmd + F5)
+- Chrome Extension
+
+### Accessibility for Screen Reader
+- By Default Accessible HTML
+  - Document Structure
+    - ```<header>```
+    - ```<nav>```
+    - ```<main>```
+    - ```<section>```
+    - ```<article>```
+    - ```<footer>```
+  - Heading
+    - ```<h1></h6>```
+  - Lists
+    - ```<ul><ol><li>```
+  - Links and Button
+    - ```<a><button>```
+   - Form Elements
+     - ```<label>, <input type="email">```
+  - Tables
+    - ```<caption><thead><tbody><tfoot><th><tr><td>```   
+  - Images
+    - ```<img alt="">```
+  - Audio/Video
+    - Transcript, Open Text Captions
+  - CSS class hidden 
+- ARIA(Accessible Rich Internet Application)
+  -  Form: Labels
+  - aria-label
+  - aria-labelledby
+  - aria-describedby
+- Aria Categories
+  - Roles: ```aria-role="button"```
+  - Properties: ```aria-describedby="id-ref"```
+  - States: ```aria-pressed="false"```
   
+- Live Regions
+  - ```aria-live: assertive | polite | off```
+
+- Focus Management
+  - Tab Navigation
+  - Keyboard Shortcuts
+  - Skip Links
+  - Active Element
+  - Tab Trapping
+  - Page Navigation  
