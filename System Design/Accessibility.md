@@ -97,4 +97,29 @@
   - Skip Links
   - Active Element
   - Tab Trapping
-  - Page Navigation  
+  - Page Navigation
+
+- Tab Navigation (Defaults Tab Index)
+  - ```<a>```
+  - ```<button>```
+  - ```<select>```
+  - ```<textarea>```
+  - ```<iframe>```
+- Keyboard Shortcuts
+  - Implement using JS
+- Skip Links
+  - To skip over Header links quickly. Jump right to the content
+- Active Element 
+  1. A modal is about to be opened.
+  2. Store the current news item.
+  ```const currentItem = document.activeElement```
+  3. Open the modal
+  4. On Modal close, refocus on the news item they had open
+  ```currentItem.focus()```
+- Tab Trapping
+  - If modal is open, focus should always be inside modal.
+- Page Navigation
+  - Skip Links
+  - aria-live
+  - contentElement.focus()  
+
