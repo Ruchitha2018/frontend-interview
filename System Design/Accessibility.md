@@ -122,4 +122,26 @@
   - Skip Links
   - aria-live
   - contentElement.focus()  
+- Color Contrast
+  - Dark and Light Mode
+  - Zoom in and out foint size
+  - em instead of px for font
+  - prefers-color-scheme
+  - Accessibility > Contrast Themes in windows
+  - ```window.matchMedia("(prefers-color-scheme:dark)")```  
+- Accessibility Tools and Techniques
+  - Automation
+    - AXE (Windows)
+    - Espresso (Android)
+    - eslint-plugin-jsx-ally (linter)
+    - accessibility plugin 
+  - Manual
+    - Lighthouse
+    - Deque's Axe Tools
+    - Element Tab in devetools
+  - Out of Box
+    - Material UI
+    - Fluent UI
+    Above frameworks are in built accessibility    
+- Website: https://not-checklist.intopia.digital/    
 
