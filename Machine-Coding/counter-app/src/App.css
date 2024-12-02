@@ -1,0 +1,26 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.btn-flex {
+  display: flex;
+  gap: 15px;
+}
+.btn {
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 15px;
+}
+.btn-primary {
+  background-color: #08b4b3;
+  color: #fff;
+  border: 1px solid #08b4b3;
+}
+.btn-success {
+  background-color: #ff00009e;
+  color: #fff;
+  border: 1px solid #ff00009e;
+}
