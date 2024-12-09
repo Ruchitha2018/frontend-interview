@@ -38,7 +38,8 @@ function App() {
 
   return (
     <>
-      <Accordion defaultActiveKey={"1"}>
+    <h1>Multiple Open Accordion</h1>
+      <Accordion defaultActiveKey={["1"]} alwaysOpen>
         {accordionData.map((data, index) => (
           <>
             <AccordionItem eventKey={data.id} key={index}>

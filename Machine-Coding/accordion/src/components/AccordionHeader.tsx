@@ -9,15 +9,16 @@ const AccordionHeader = ({ children }) => {
 
   const handleClick = () => {
     if(alwaysOpen) {
-      setActiveId((prev) =>
-        prev.includes(eventKey) ? prev.filter((data) => data !== eventKey) : [...prev, eventKey]
+      setActiveId((prev) => {
+        console.log(prev);
+        return prev.includes(eventKey) ? prev.filter((data) => data !== eventKey) : [...prev, eventKey]
+      }
       );
     } else {
       eventKey === activeId ? setActiveId(null) : setActiveId(eventKey)
     }
   }
-
-  return <div className="accordion-header" onClick = {handleClick}>{children}</div>;
+   return <div className="accordion-header" onClick = {handleClick}>{children}</div>;
 };
 
 export default AccordionHeader;
