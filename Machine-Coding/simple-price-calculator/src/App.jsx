@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import ProductRow from "./components/ProductRow";
 
 function App() {
   const [products, setProducts] = useState([{id: 1, quantity:0, price:0}]);
+  const [disabledbtn, setDisabledBtn] = useState(false)
 
   const addProduct = () => {
     console.log(products)
@@ -17,7 +18,13 @@ function App() {
     ]);
   };
 
+  useEffect(() => {
+    const checkProducts = products.every((product) => product.price !== 0 && product.quantity !==0);
+    setDisabledBtn(checkProducts)
+  },[products])
+
   const totalAmount = products.reduce((total, product) => total + product.quantity * product.price, 0)
+
 
   return (
     <>
@@ -26,7 +33,7 @@ function App() {
           <ProductRow setProducts={setProducts} singleProduct={data} products={products} productIndex={index}/>
         </div>
       ))}
-      <button onClick={addProduct}>Add Item</button>   
+      <button onClick={addProduct} disabled={!disabledbtn}>Add Item</button>   
       <p>Total Item: {totalAmount}</p> 
     </>
   );

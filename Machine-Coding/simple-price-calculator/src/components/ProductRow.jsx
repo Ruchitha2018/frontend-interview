@@ -1,7 +1,7 @@
 function ProductRow({ setProducts, singleProduct, products, productIndex }) {
   const updateField = (e) => {
     const newProducts = [...products];
-    newProducts[productIndex] = {...singleProduct, [e.target.name]:e.target.value};
+    newProducts[productIndex] = {...singleProduct, [e.target.name]:parseFloat(e.target.value) || 0};
     setProducts(newProducts);
   };
 
