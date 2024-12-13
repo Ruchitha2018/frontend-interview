@@ -172,3 +172,58 @@ import { MyComponent } from './MyComponent';
 ```
 import MyComponent from './MyComponent';
 ```
+### 19. Difference between React and React DOM:
+- React:
+  - Used to build UI components and manage their logic and state
+  - Do not directly interact with the DOM.
+  - Eg:- ```useState``` and ```useEffect```
+
+- React DOM:
+  - Renders React components to the browser DOM
+  - Used to update the browser DOM efficiently using React's Virtual DOM
+  - Eg:- ```ReactDOM.createRoot```  and ```ReactDOM.render```
+
+- Separation allows React to work on different platforms (e.g., React Native).
+- Keeps React lightweight and modular for easier maintenance.
+
+### 20. React Animation Packages:
+- Framer Motion
+- React Spring
+- React Transition Group
+- React Motion
+
+### 21. React Specific Linters
+- Help maintain clean, consistent and error-free code in React Projects.
+- Plugins:
+ - ```eslint-plugin-react```: Provides linting rules for React.
+ - ```eslint-plugin-react-hooks```: Ensures the correct usage of React Hooks.
+ - ```eslint-plugin-jsx-a11y```: Enforces accessibility best practices in JSX code.
+ - Code formatter, integrates with ESLint using ```eslint-plugin-prettier```.
+
+ ### 22. How to pretty print JSON with React?
+
+```
+const App = () => {
+  const data = { name: "John", age: 30, city: "New York" };
+
+  return (
+    <pre>{JSON.stringify(data, null, 2)}</pre> // Pretty-print JSON
+  );
+};
+
+export default App;
+```
+
+### Why you can't update props in React?
+Props are immutable: They cannot be changed by the child component.
+Unidirectional data flow: Props flow from parent to child, ensuring predictable updates.
+Controlled by parent: Props reflect parent state; only the parent can update them.
+Solution: Manage the value in the parent’s state and pass it via props.
+
+### Naming a Component Names
+-  Components must start with an uppercase letter.
+- Use PascalCase for custom components (e.g., MyComponent).
+- Lowercase names are treated as HTML tags.
+- Avoid React-reserved names like React or Component.
+
+### React Mixins

@@ -4,3 +4,5 @@
 4. Element vs Component
 5. Pure Components
 6. HOC
+7. Styling in React
+8. How to re-render the view when the browser is resized?
