@@ -227,3 +227,54 @@ Solution: Manage the value in the parent’s state and pass it via props.
 - Avoid React-reserved names like React or Component.
 
 ### React Mixins
+
+
+### How to pass numbers to React component?
+```
+<NumberDisplay value={10} /> // Correct
+<NumberDisplay value="10" /> // Passes as a string, not a number
+```
+
+### What is the purpose of registerServiceWorker in React?
+1. Offline Support: Allows the app to work without an internet connection by caching files.
+2. Faster Loading: Loads the app faster by using cached assets instead of fetching them from the network.
+3. Background Features: Enables tasks like background sync and push notifications.
+4. Progressive Web Apps (PWA): Helps turn your app into a PWA with app-like features.
+
+```
+import * as serviceWorker from './serviceWorker';
+
+// Enable service worker for offline support
+serviceWorker.register(); // Registers the service worker
+// Use serviceWorker.unregister() if you don't need it.
+```
+
+- Works only on https:// or localhost.
+- Use carefully to avoid serving outdated cached content.
+
+
+
+### React.lazy function
+- Dynamically loads components for code-splitting, reducing the initial bundle size.
+- Loads components only when they are rendered.
+- It helps reduce the initial load time by splitting the app into smaller bundles and loading components only when needed.
+- Improves performance by reducing the size of the initial JavaScript bundle.
+```
+import React, { Suspense } from 'react';
+
+const LazyComponent = React.lazy(() => import('./MyComponent'));
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LazyComponent />
+    </Suspense>
+  );
+}
+```
+- How it works?
+  - React.lazy takes a function that dynamically imports a component (e.g., () => import('./MyComponent')).
+  -  The component is loaded when it’s rendered for the first time.
+  - A Suspense component is required to handle the loading state.
+
+

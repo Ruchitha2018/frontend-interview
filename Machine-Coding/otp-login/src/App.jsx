@@ -3,11 +3,6 @@ import './App.css'
 import OtpInput from './components/OtpInput';
 
 function App() {
-
-
-  useEffect(() => {
-  }, [])
-
   return (
     <>
    

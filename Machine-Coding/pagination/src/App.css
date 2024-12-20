@@ -1,0 +1,21 @@
+.products-listings {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+}
+.products-pagination {
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.products-pagination span {
+  padding: 15px 30px;
+  cursor: pointer;
+}
+.products-pagination .active {
+   background-color: blue;
+   color: #fff;
+}
+.pagination__disable{
+  opacity: 0;
+}
