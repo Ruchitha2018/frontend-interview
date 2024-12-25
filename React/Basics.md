@@ -1,12 +1,12 @@
-## Basics
+# Basics
 
-### 1. What is React?
+## What is React?
 
 - Open-Source
 - JS Frontend Library
 - used for building composable UIs particularly for SPAs.
 
-### 2. Features of React?
+## Features of React?
 
 - Uses JSX Syntax: A syntax extension that allows you to write HTML-like code within JavaScript.
 - Uses Virtual DOM
@@ -14,17 +14,17 @@
 - Supports Server Side Rendering, which is useful for SEO.
 - Unidirectional/one-way data flow
 
-### 3. JSX
+## JSX
 
 - Uses JSX Syntax: A syntax extension that allows you to write HTML-like code within JavaScript.
 - Syntactic Sugar for the `React.createElement(type, props, ...children)`
 
-### 4. Ways of creating components
+## Ways of creating components
 
 - Functional Components
 - Class Components
 
-### 5. What are States?
+## What are States?
 
 - It is an object that is used to store information and holds dynamic data while the app is running, like user input, button clicks, or data fetched from a server.
 - Local to each component
@@ -32,65 +32,62 @@
 - When a components state changes, React automatically re-renders
 - Managed with `useState` hook.
 
-### 6. What are Props?
+## What are Props?
 
 - Way to pass static/dynamic data from parent to child components.
 - Immutable
 - Passed as Attributes
 
-### 7. Key Prop?
+## Key Prop?
 
 - Special attribute should include when mapping arrays/objects.
 - Helps which items have changed, added or removed.
 - Used for performance optimization.
 - Should be unique value
 
-### 8. Virtual DOM
+## Virtual DOM
 
 - It is the lightweight copy of the real DOM.
 - Steps:
-- When component re-renders, React creates a virtual copy of the Real DOM i.e., virtual DOM.
-- When app data changes, React first updates the Virtual DOM, not the Real DOM.
-- React compares the updated virtual DOM with the previous version of the virtual DOM called Diffing.
-- React identifies which parts of the virtual DOM have changed (e.g., new elements, deleted elements, updated content) and needs to be reflected in the real DOM.
-- It updates only the changed parts of the real DOM, making the app fast and efficient called Reconciliation.
-- reconciliation helps React figure out the smallest number of changes to make, improving performance and speed.
+  - When component re-renders, React creates a virtual copy of the Real DOM i.e., virtual DOM.
+  - When app data changes, React first updates the Virtual DOM, not the Real DOM.
+  - React compares the updated virtual DOM with the previous version of the virtual DOM called Diffing.
+  - React identifies which parts of the virtual DOM have changed (e.g., new elements, deleted elements, updated content) and needs to be reflected in the real DOM.
+  - It updates only the changed parts of the real DOM, making the app fast and efficient called Reconciliation.
+  - Reconciliation helps React figure out the smallest number of changes to make, improving performance and speed.
 
-### 9. Controlled Components
+## Controlled Components
 
-- forms element state is managed by React.
-- value of the input is controlled by the components state.
+- Forms element state is managed by React.
+- Value of the input is controlled by the components state.
 
-### 10. Uncontrolled Components
+## Uncontrolled Components
 
-- forms element state is managed by DOM.
-- input value is accessed using a ref.
+- Forms element state is managed by DOM.
+- Input value is accessed using a ```ref```.
 
-### 11. Children Prop
+##  Children Prop
 
 - special prop that allows to pass content(text, element or component) to a component from its parent.
 - commonly used in layout components like wrappers, containers or modal dialogs.
 
-### 12. Fragments
+## Fragments
 
 - It is the way to group multiple elements together without adding extra `div` or nodes.
 - `<></>`
 - `<React.Fragment></React.Fragment>`
 
-### 13. Portals
+## Portals
 
 - It allows us to render components outside the parent component DOM hierarchy.
 - Examples are Modals, Tooltips, Notifications
-- HTML Code
 
-```
+```html
 <div id="root"></div> <!-- Normal app -->
 <div id="modal-root"></div> <!-- Space for portals -->
 ```
 
-- React Code
-
-```
+```js
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -113,66 +110,126 @@ function App() {
 export default App;
 ```
 
-### 15. Stateful Components
+## Stateful Components
 
 - Components which can store and manage data using state.
 - uses `useState()` hook.
 
-### 16. Stateless Components
+## Stateless Components
 
 - Components which do not depend on state.
 - They are pure components.
 - They focus solely on rendering UI based on the provided input i.e., `props`
 - Used when we need to display data passed as props.
 
-### 17. React Components Naming
+## React Components Naming
 
-1. Start with a Capital Letter: Components must use PascalCase (e.g., MyComponent). Lowercase names are treated as HTML tags.
-2. Avoid Reserved Keywords: Don't use JavaScript or HTML reserved words like return or default.
-3. No Special Characters: Names cannot include dashes, spaces, or special symbols.
-4. Dynamic Names Not Allowed: Components can't be named using strings or variables.
-5. Export-Import Match: For named exports, import names must match the export. Default exports can use any name.
+1. **Start with a Capital Letter:** Components must use PascalCase (e.g., MyComponent). Lowercase names are treated as HTML tags.
+2. **Avoid Reserved Keywords:** Don't use JavaScript or HTML reserved words like return or default.
+3. **No Special Characters:** Names cannot include dashes, spaces, or special symbols.
+4. **Dynamic Names Not Allowed:** Components can't be named using strings or variables.
+5. **Export-Import Match:** For named exports, import names must match the export. Default exports can use any name.
 
-```
+```js
 const DynamicComponent = "MyComponent";
 <DynamicComponent />; // Error: React cannot dynamically resolve this
 
 const My-Component = () => {}; // Syntax error
 ```
 
-Instead use below:-
+### Instead use below:-
 
-```
+```js
 const DynamicComponent = MyComponent;
 <DynamicComponent />;
 ```
 
-### 18. How to import and export components using React and ES6?
-
-#### Exporting Components
-
-1. Named Export
-
+##  How to import and export components using React and ES6?
+### 1. Default Export
+- A file can have only one default export.
+- Import without curly braces, and the name can be any.
+```js
+// Exporting File: MyComponent.js
+export default function MyComponent() {
+    return <h1>Hello, I am the default export!</h1>;
+}
 ```
-export const MyComponent = () => <div>Hello!</div>;
-```
-
-2. Default Export
-
-```
-const MyComponent = () => <div>Hello!</div>;
-export default MyComponent;
-```
-#### Importing Components
-1. Import Named Exports:
-```
-import { MyComponent } from './MyComponent';
-```
-2. Import Default Export:
-```
+```js
+// Importing File: App.js 
 import MyComponent from './MyComponent';
+
+function App() {
+    return (
+        <div>
+            <MyComponent />
+        </div>
+    );
+}
+
+export default App;
 ```
-### 19. Difference between React and React DOM:
+### 2. Named Export
+- A file can have multiple named exports.
+- Import using curly braces `{}` with exact names.
+```js
+// Exporting File: MyComponents.js
+export function Header() {
+    return <h1>This is the Header</h1>;
+}
+
+export function Footer() {
+    return <h3>This is the Footer</h3>;
+}
+
+```
+```js
+// Importing File: App.js
+import { Header, Footer } from './MyComponents';
+
+function App() {
+    return (
+        <div>
+            <Header />
+            <Footer />
+        </div>
+    );
+}
+
+export default App;
+```
+### 3. Mixed Export
+Use both default and named exports in the same file.
+```js
+// Exporting File: MyComponents.js
+export default function Main() {
+    return <p>This is the Main Component</p>;
+}
+
+export function Header() {
+    return <h1>This is the Header</h1>;
+}
+
+export function Footer() {
+    return <h3>This is the Footer</h3>;
+}
+```
+```js
+// Importing: File: App.js
+import Main, { Header, Footer } from './MyComponents';
+
+function App() {
+    return (
+        <div>
+            <Header />
+            <Main />
+            <Footer />
+        </div>
+    );
+}
+
+export default App;
+```
+## Difference between React and React DOM:
 - React:
   - Used to build UI components and manage their logic and state
   - Do not directly interact with the DOM.
@@ -186,13 +243,13 @@ import MyComponent from './MyComponent';
 - Separation allows React to work on different platforms (e.g., React Native).
 - Keeps React lightweight and modular for easier maintenance.
 
-### 20. React Animation Packages:
+## React Animation Packages:
 - Framer Motion
 - React Spring
 - React Transition Group
 - React Motion
 
-### 21. React Specific Linters
+## React Specific Linters
 - Help maintain clean, consistent and error-free code in React Projects.
 - Plugins:
  - ```eslint-plugin-react```: Provides linting rules for React.
@@ -200,9 +257,9 @@ import MyComponent from './MyComponent';
  - ```eslint-plugin-jsx-a11y```: Enforces accessibility best practices in JSX code.
  - Code formatter, integrates with ESLint using ```eslint-plugin-prettier```.
 
- ### 22. How to pretty print JSON with React?
+ ## How to pretty print JSON with React?
 
-```
+```js
 const App = () => {
   const data = { name: "John", age: 30, city: "New York" };
 
@@ -214,34 +271,29 @@ const App = () => {
 export default App;
 ```
 
-### Why you can't update props in React?
-Props are immutable: They cannot be changed by the child component.
-Unidirectional data flow: Props flow from parent to child, ensuring predictable updates.
-Controlled by parent: Props reflect parent state; only the parent can update them.
-Solution: Manage the value in the parent’s state and pass it via props.
-
-### Naming a Component Names
--  Components must start with an uppercase letter.
-- Use PascalCase for custom components (e.g., MyComponent).
-- Lowercase names are treated as HTML tags.
-- Avoid React-reserved names like React or Component.
-
-### React Mixins
+## Why you can't update props in React?
+- Props are immutable: They cannot be changed by the child component.
+- Unidirectional data flow: Props flow from parent to child, ensuring predictable updates.
+- Controlled by parent: Props reflect parent state; only the parent can update them.
+- Solution: Manage the value in the parent’s state and pass it via props.
 
 
-### How to pass numbers to React component?
-```
+## React Mixins
+
+
+## How to pass numbers to React component?
+```js
 <NumberDisplay value={10} /> // Correct
 <NumberDisplay value="10" /> // Passes as a string, not a number
 ```
 
-### What is the purpose of registerServiceWorker in React?
+## What is the purpose of registerServiceWorker in React?
 1. Offline Support: Allows the app to work without an internet connection by caching files.
 2. Faster Loading: Loads the app faster by using cached assets instead of fetching them from the network.
 3. Background Features: Enables tasks like background sync and push notifications.
 4. Progressive Web Apps (PWA): Helps turn your app into a PWA with app-like features.
 
-```
+```js
 import * as serviceWorker from './serviceWorker';
 
 // Enable service worker for offline support
@@ -253,28 +305,5 @@ serviceWorker.register(); // Registers the service worker
 - Use carefully to avoid serving outdated cached content.
 
 
-
-### React.lazy function
-- Dynamically loads components for code-splitting, reducing the initial bundle size.
-- Loads components only when they are rendered.
-- It helps reduce the initial load time by splitting the app into smaller bundles and loading components only when needed.
-- Improves performance by reducing the size of the initial JavaScript bundle.
-```
-import React, { Suspense } from 'react';
-
-const LazyComponent = React.lazy(() => import('./MyComponent'));
-
-export default function App() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <LazyComponent />
-    </Suspense>
-  );
-}
-```
-- How it works?
-  - React.lazy takes a function that dynamically imports a component (e.g., () => import('./MyComponent')).
-  -  The component is loaded when it’s rendered for the first time.
-  - A Suspense component is required to handle the loading state.
 
 
