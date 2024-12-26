@@ -1,10 +1,10 @@
 # Memoization
 
-- What is memoization?
-- React.memo
-- useMemo hook
-- useCallback hook
-- React.lazy and Suspense
+1. What is memoization?
+2. React.memo
+3. useMemo hook
+4. useCallback hook
+5. React.lazy and Suspense
 
 ### Definition:
 
@@ -64,24 +64,42 @@ console.log(add(1, 2)); // Calculating...
 console.log(add(1, 2)); // Fetching from cache...
 ```
 
-### React.memo function
+## React Hooks and Utilities for Memoization
 
-- `React.memo` is a higher-order component (HOC) that optimizes functional components by preventing unnecessary re-renders. It memoizes the output of the component and re-renders it only when its props change.
-- Improves performance by skipping re-renders for components that receive the same props.
+### 1. `React.memo`
+
+- Memoizes a functional component so it only re-renders when its props change.
+-  Improves performance by skipping re-renders for components that receive the same props.
 - If the props remain the same between renders, the component is not re-rendered.
-- We can customize the comparison logic using a second argument to React.memo.
 - If we are sending the function as props, then React.memo wont work.
 
 ```js
 import React from 'react';
 
-const MyComponent = React.memo((props) => {
-  console.log('Rendering MyComponent');
-  return <div>{props.value}</div>;
+const Child = React.memo(({ count }) => {
+    console.log("Child rendered");
+    return <div>Count: {count}</div>;
 });
 
-export default MyComponent;
+function Parent() {
+    const [count, setCount] = React.useState(0);
+    const [otherState, setOtherState] = React.useState(false);
+
+    return (
+        <div>
+            <Child count={count} />
+            <button onClick={() => setCount(count + 1)}>Increment Count</button>
+            <button onClick={() => setOtherState(!otherState)}>Toggle Other State</button>
+        </div>
+    );
+}
+
+export default Parent;
+
 ```
+- Child will only re-render when the count prop changes.
+- Changes in otherState won't trigger a re-render for Child.
+- We can customize the comparison logic using a second argument to React.memo.
 
 ```js
 const MyComponent = React.memo(
@@ -92,63 +110,40 @@ const MyComponent = React.memo(
 );
 ```
 
-### ```useMemo``` Hook in React
-
-- Purpose:
-
-  - The `useMemo ` hook is used to optimize performance by memoizing the result of a function so that it is recalculated only when dependencies change.
-  - Avoid unnecessary recalculations of expensive functions.
-
-- When to Use:
-
-  - For heavy computations (e.g., filtering, sorting).
-  - When the result of a calculation doesn’t change unless specific values (dependencies) change.
-
-    `const memoizedValue = useMemo(() => computeFunction(), [dependencies]);`
-
-- Parameters:
-
-  - computeFunction: The function whose result you want to memoize.
-  - [dependencies]: An array of values that, when changed, will trigger the recomputation.
-
-- Return Value:
-
-  Returns the memoized result of the function.
-
+### 2. ```useMemo```
+- Memoizes the result of a computation and recalculates it only when dependencies change.
 ```js
 import React, { useState, useMemo } from 'react';
 
-const App = () => {
-  const [search, setSearch] = useState('');
-  const [data] = useState(['apple', 'banana', 'cherry', 'date', 'elderberry']);
+function ExpensiveCalculation(num) {
+    console.log("Calculating...");
+    return num * 2;
+}
 
-  // Memoized filtering
-  const filteredData = useMemo(() => {
-    console.log('Filtering...');
-    return data.filter((item) => item.includes(search));
-  }, [search, data]);
+function App() {
+    const [number, setNumber] = useState(0);
+    const [toggle, setToggle] = useState(false);
 
-  return (
-    <div>
-      <input
-        type="text"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        placeholder="Search fruits"
-      />
-      <ul>
-        {filteredData.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+    const doubled = useMemo(() => ExpensiveCalculation(number), [number]);
+
+    return (
+        <div>
+            <h1>Doubled Value: {doubled}</h1>
+            <button onClick={() => setNumber(number + 1)}>Increment</button>
+            <button onClick={() => setToggle(!toggle)}>Toggle</button>
+        </div>
+    );
+}
 
 export default App;
+
 ```
 
-### useCallback Hook
+- ExpensiveCalculation is only called when number changes.
+- Changing toggle does not trigger the expensive calculation.
+
+
+### 3. ```useCallback``` 
 
 `useCallback` is a React hook that memorizes a function definition so that it doesn’t get recreated unnecessarily during re-renders.
 
@@ -168,9 +163,6 @@ const memoizedFunction = useCallback(() => {
   - Callback Function: The function to be cached.
   - Dependencies: Values that, when changed, recreate the function.
 
-- Use Cases:
-  - Optimizing child components that rely on props for avoiding unnecessary re-renders.
-  - When functions depend on variables that might change (dependencies).
 
 ```js
 import React, { useState, useCallback } from 'react';
@@ -206,7 +198,7 @@ export default App;
   - With useCallback:
     The increment function is cached and does not trigger a re-render of Button unless its dependencies change.
 
-### React.lazy function
+### 4. React.lazy function
 
 - Dynamically loads components for code-splitting, reducing the initial bundle size.
 - Loads components only when they are rendered.
@@ -231,3 +223,41 @@ export default function App() {
   - React.lazy takes a function that dynamically imports a component (e.g., () => import('./MyComponent')).
   - The component is loaded when it’s rendered for the first time.
   - A Suspense component is required to handle the loading state.
+
+## How to Use React.memo Effectively When Passing Functions as Props?
+- In JavaScript, functions are reference types.
+- When a parent component re-renders, even if the logic of the function doesn't change, a new function reference is created and passed down as a prop.
+- React.memo detects this new reference and considers it a prop change, so it re-renders the child component.
+- To prevent unnecessary re-renders, use React.memo with useCallback to memoize the function in the parent component. This ensures the function reference stays the same unless its dependencies change.
+
+## How to Use React.memo Effectively When Passing Objects and Arrays as Props?
+- When a parent component re-renders, even if the values of the object or array remain the same, a new reference is created.
+- React.memo compares the references of props, not their contents, so it considers the prop to have changed and triggers a re-render
+- To prevent unnecessary re-renders, you should memoize the objects or arrays using `useMemo` in the parent component. This ensures their references stay the same unless their values change.
+
+```js
+import React, { useMemo } from "react";
+
+const Child = React.memo(({ data }) => {
+  console.log("Child rendered");
+  return <p>{data.value}</p>;
+});
+
+function Parent() {
+  const [count, setCount] = React.useState(0);
+
+  // Memoizing the object to retain its reference
+  const data = useMemo(() => ({ value: "Hello, World!" }), []);
+
+  console.log("Parent rendered");
+
+  return (
+    <div>
+      <Child data={data} />
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+
+export default Parent;
+```
