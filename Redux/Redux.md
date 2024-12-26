@@ -242,9 +242,10 @@ const CounterButtons = () => {
     - payload: Holds any additional data passed to the action.
 
 # Action Creators
+
 - Action creators are functions that return action objects.
 - They make code cleaner, reusable, and easier to debug.
-- In Redux Toolkit, ```createAction``` further simplifies action creator usage.    
+- In Redux Toolkit, `createAction` further simplifies action creator usage.
 
 # What is createAsyncThunk?
 
@@ -361,48 +362,46 @@ View → Dispatch Action → Reducer → Update State → Reflect in View
 Detailed Text Representation of Redux Flow
 
 1. React Component (View)
-   Purpose: The starting point where the user interacts with the application. This could be a button click, form submission, etc.
-   Action Trigger: When an event occurs (e.g., a button click), a function in the React component calls dispatch() to send an action.
-   Example:
+   - The starting point where the user interacts with the application. This could be a button click, form submission, etc.
+2. Action Trigger:
+   - When an event occurs (e.g., a button click), a function in the React component calls dispatch() to send an action.
 
-javascript
-Copy code
+```js
 const handleClick = () => {
+  dispatch({ type: "INCREMENT", payload: 1 });
+};
+```
+
+3. Dispatch Action
+- ```dispatch()``` is a method provided by the Redux store.
+- It sends an action object to the store, describing the change you want to make.
+
+```js
 dispatch({ type: 'INCREMENT', payload: 1 });
-}; 2. Dispatch Action
-What Happens:
-dispatch() is a method provided by the Redux store.
-It sends an action object to the store, describing the change you want to make.
-Example:
+```
 
-javascript
-Copy code
-dispatch({ type: 'INCREMENT', payload: 1 });
-Action Object:
+4. Action Object:
 
-A plain JavaScript object that must have a type property and optional payload for additional data.
-javascript
-Copy code
-{ type: 'INCREMENT', payload: 1 } 3. Action
-What Happens:
-The dispatched action reaches the Redux store.
-The store forwards it to the reducer(s) for processing.
-Key Points:
+- A plain JavaScript object that must have a type property and optional payload for additional data.
 
-Actions are plain objects.
-They describe what happened, but not how the state changes. 4. Reducer
-What Happens:
-The store calls the reducer function with the current state and the action.
-The reducer computes the new state based on the action type and payload.
-The reducer returns the updated state.
-Key Points:
+```js
+{ type: 'INCREMENT', payload: 1 }
+```
 
-Reducers are pure functions (no side effects).
-They must not mutate the original state but return a new one.
-Example:
+5. Action
+- The dispatched action reaches the Redux store.
+- The store forwards it to the reducer(s) for processing.
+- Actions are plain objects.
+- They describe what happened, but not how the state changes. 
 
-javascript
-Copy code
+6. Reducer
+- The store calls the reducer function with the current state and the action.
+- The reducer computes the new state based on the action type and payload.
+- The reducer returns the updated state.
+- Reducers are pure functions (no side effects).
+- They must not mutate the original state but return a new one.
+
+```js
 const counterReducer = (state = { count: 0 }, action) => {
 switch (action.type) {
 case 'INCREMENT':
@@ -410,17 +409,18 @@ return { ...state, count: state.count + action.payload };
 default:
 return state;
 }
-}; 5. Redux Store
-What Happens:
-The store updates its state with the new state returned by the reducer.
-It notifies all React components subscribed to the store.
-Key Points:
+};
+```
 
-The store acts as the central source of truth for the application state.
-Subscribed components automatically receive the latest state. 6. Updated State
-What Happens:
-The updated state is made available to React components.
-Components re-render if they are subscribed to the updated portion of the state.
+7. Redux Store
+- The store updates its state with the new state returned by the reducer.
+- It notifies all React components subscribed to the store.
+- The store acts as the central source of truth for the application state.
+- Subscribed components automatically receive the latest state.
+
+8. Updated State
+- The updated state is made available to React components.
+- Components re-render if they are subscribed to the updated portion of the state.
 
 ### Redux Flow Summary
 
