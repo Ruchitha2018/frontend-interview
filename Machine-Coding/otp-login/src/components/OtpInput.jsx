@@ -25,7 +25,7 @@ const OtpInput = ({ length }) => {
       {otp.map((data, index) => {
         return (
           <input type="text" value={data} className="otp-input-field" 
-          onChange={(e) => handleChange(index, e)}ref={(inputRef) => inputRefs.current[index] = inputRef}/>
+          onChange={(e) => handleChange(index, e)} ref={(inputRef) => inputRefs.current[index] = inputRef}/>
         )
       }) }
     </div>
