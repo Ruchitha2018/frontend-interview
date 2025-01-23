@@ -47,7 +47,8 @@ myPromise
     .finally(() => console.log("Done"));  // Logs: "Done"
 ```
 
-### 6. How to chain an Promise?
+### 6. What is Promise Chaining?
+- Promises can be chained to execute multiple asynchronous operations in sequence.
 ```js
 fetch("https://api.example.com/data")
     .then(response => response.json())
