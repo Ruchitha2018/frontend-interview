@@ -52,3 +52,5 @@
 
 ### My Topics
 - RxJS - Observables
+- Proxy Object
+- Map

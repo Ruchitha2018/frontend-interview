@@ -1,6 +1,6 @@
 # Objects
 
-### Different ways to create Objects
+### 1. Different ways to create Objects
 #### 1. Object Literal
 ```js
 const obj = {
@@ -97,8 +97,8 @@ map.set("name", "Jack");
 map.set("age", 45);
 console.log(map.get("name")); // Output: Jack
 ```
-
-## Constructor
+---
+## 2. What is a Constructor?
 - A method to initialize objects when creating instances of a class.
 - They are named with capital letter first.
 - They should be executed only with `"new"` operator.
@@ -156,3 +156,133 @@ const emp = new Employee('Ruchitha', 25, 'Developer');
 emp.describe();
 // Output: Ruchitha is a Developer and is 25 years old.
 ```
+---
+### How to add key value pair in JS?
+  1. Using Dot Notation
+```js
+const obj = {};
+obj.key = "value"; // Add a key-value pair
+console.log(obj);  // Output: { key: "value" }
+```
+2. Using Bracket Notation
+- Useful when the key is dynamic or contains special characters.
+```js
+const obj = {};
+obj["key"] = "value"; // Add a key-value pair
+console.log(obj);     // Output: { key: "value" }
+
+```
+--- 
+### How do you copy properties from one object to other?
+- Shallow Copy: `Object.assign()` and the spread operator create a shallow copy, meaning nested objects are not deeply cloned.
+- Deep Copy: For deeply nested objects, use libraries like Lodash or structured cloning (`structuredClone()` in modern browsers).
+
+```js
+const source = { a: 1, b: 2 };
+const target = { c: 3 };
+
+Object.assign(target, source);
+console.log(target); // Output: { c: 3, a: 1, b: 2 }
+```
+
+```js
+const source = { a: 1, b: 2 };
+const target = { c: 3 };
+
+const result = { ...target, ...source };
+console.log(result); // Output: { c: 3, a: 1, b: 2 }
+```
+
+### What is `Object.seal()` method?
+- New properties cannot be added.
+- Existing properties cannot be deleted.
+- Existing properties can still be modified (if they are writable).
+```js
+const obj = { a: 1, b: 2 };
+Object.seal(obj);
+
+obj.a = 3;  // Allowed: value of 'a' is modified
+obj.c = 4;  // Not allowed: new property 'c' cannot be added
+delete obj.b; // Not allowed: 'b' cannot be deleted
+
+console.log(obj); // Output: { a: 3, b: 2 }
+```
+
+### What is `Object.freeze()` method?
+- New properties cannot be added.
+- Existing properties cannot be deleted.
+- Existing properties cannot be modified (they become read-only).
+
+```js
+const obj = { a: 1, b: 2 };
+Object.freeze(obj);
+
+obj.a = 3;  // Not allowed: 'a' is read-only
+obj.c = 4;  // Not allowed: new property 'c' cannot be added
+delete obj.b; // Not allowed: 'b' cannot be deleted
+
+console.log(obj); // Output: { a: 1, b: 2 }
+```
+---
+### How do you determine if an object is sealed or not?
+```js 
+Object.isSealed(obj)
+```
+---
+### What is `Object.values()` ?
+- Returns an array of values from the object.
+```js
+const obj = { a: 1, b: 2 };
+console.log(Object.values(obj)); // Output: [1, 2]
+```
+---
+### What is `Object.entries()` ?
+- Returns an array of key-value pairs (each pair is an array).
+```js
+const obj = { a: 1, b: 2 };
+console.log(Object.entries(obj)); // Output: [['a', 1], ['b', 2]]
+```
+---
+### What is `Object.keys()` ?
+- It returns an array of keys in the object.
+```js
+const obj = { a: 1, b: 2, c: 3 };
+console.log(Object.keys(obj)); // Output: [ 'a', 'b', 'c' ]
+```
+
+### How do you create an object with Prototype?
+1. Using `Object.create()`:
+```js
+const prototypeObj = { greet: function() { console.log("Hello!"); } };
+const obj = Object.create(prototypeObj);
+
+obj.greet(); // Output: Hello!
+```
+2. Using Constructor Functions:
+```js
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.sayHello = function() {
+  console.log(`Hi, I'm ${this.name}`);
+};
+
+const person = new Person("Ruchitha");
+person.sayHello(); // Output: Hi, I'm Ruchitha
+```
+3. Using ES6 `class` syntax: Classes in JavaScript are syntactic sugar over constructor functions and prototypes.
+```js
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    console.log(`${this.name} makes a sound.`);
+  }
+}
+
+const dog = new Animal("Dog");
+dog.speak(); // Output: Dog makes a sound.
+```
+

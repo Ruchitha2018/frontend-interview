@@ -4,10 +4,14 @@
 - It is an JS object used to handle asynchronous operations.
 - It may produce a single value either resolved or rejected.
 
+---
+
 ### 2. What are the states of a Promise?
 - Pending: Initial state. The operation is ongoing, and the result is not yet available.
 - Fulfilled: The operation completed successfully, and the promise is resolved with a value.
 - Rejected: The operation failed, and the promise is rejected with an error.
+
+---
 
 ### 3. What are the methods of Promises?
 - `then(onFulfilled, onRejected)`:
