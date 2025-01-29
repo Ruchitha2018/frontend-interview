@@ -1,6 +1,6 @@
 # Objects
 
-### 1. Different ways to create Objects
+### What are the different ways to create Objects?
 #### 1. Object Literal
 ```js
 const obj = {
@@ -285,4 +285,9 @@ class Animal {
 const dog = new Animal("Dog");
 dog.speak(); // Output: Dog makes a sound.
 ```
+
+### Shallow Copy
+- Copies only the first level of an object or array.
+- If the copied object contains nested objects/arrays, the reference to the nested structures is copied, not the actual values.
+- Changes in the nested objects/arrays of the copy will affect the original.
 
