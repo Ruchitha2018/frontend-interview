@@ -105,3 +105,16 @@ counter(); // Output: 2
 - Code reusability across different parts of the project.
 - Easier maintenance by splitting code into smaller units.
 - Prevents global scope conflicts by keeping things modular.
+
+### How do you detect caps lock key turned on or not?
+
+```js
+document.addEventListener("keydown", function (event) {
+  if (event.getModifierState("CapsLock")) {
+    console.log("Caps Lock is ON");
+  } else {
+    console.log("Caps Lock is OFF");
+  }
+});
+```
+
